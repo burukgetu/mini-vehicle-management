@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build"
+    },
+    {
+      "src": "backend/api/**",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/vehicles",
+      "dest": "/backend/api/vehicles.js"
+    },
+    {
+      "src": "/api/vehicles/(?<id>[^/]+)",
+      "dest": "/backend/api/vehicles.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/$1"
+    }
+  ]
+}
