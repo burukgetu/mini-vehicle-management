@@ -139,42 +139,42 @@ const App = () => {
         </button>
       </div>
 
-      <table className="table-auto border-collapse w-full bg-white rounded shadow">
+      <table className="table-auto border-collapse w-full -ml-2 bg-white rounded shadow">
         <thead>
           <tr className="bg-gray-200 text-left">
-            <th className="text-left px-4 py-2">Vehicle Name</th>
-            <th className="text-left px-4 py-2">Status</th>
-            <th className="text-center px-4 py-2">Last Updated</th>
-            <th className="text-center px-4 py-2">Actions</th>
+            <th className="text-sm text-left px-1 mr-3 md:px-4 my-4 md:py-2">Vehicle Name</th>
+            <th className="text-sm text-center md:text-left md:px-4 md:py-2">Status</th>
+            <th className="text-sm text-center md:px-4 py-3">Last Updated</th>
+            <th className="text-sm text-center text-gray-200 md:text-black md:px-4 py-3">Actions</th>
           </tr>
         </thead>
         <tbody>
           {vehicles.map((vehicle) => (
             <tr key={vehicle._id} onClick={() => openModal(vehicle)} className=" hover:bg-gray-100 hover:cursor-pointer">
-              <td className="text-left px-5 py-2">{vehicle.name}</td>
+              <td className="text-sm text-left px-5 py-2">{vehicle.name}</td>
               <td 
-                className={`text-left px-4 py-2 text-white`}
+                className={`text-sm text-center md:text-left px-1 md:px-4 md:py-2 text-white`}
               >
                 <span className={`py-1 px-3 rounded-md ${vehicle.status === "active" ? "bg-green-200 text-green-600" : vehicle.status === "maintenance" ? "bg-yellow-200 text-yellow-600" : "bg-red-500"}`}>
                   {vehicle.status}
                 </span>
               </td>
-              <td className="text-center px-4 py-2" title={new Date(vehicle.lastUpdated).toLocaleString()}>
+              <td className="text-sm text-center px-4 py-2" title={new Date(vehicle.lastUpdated).toLocaleString()}>
                 {/* {new Date(vehicle.lastUpdated).toLocaleString()} */}
                 {formatDate(vehicle.lastUpdated)}
               </td>
-              <td className="text-center flex items-center justify-center px-4 py-2">
+              <td className="text-center flex items-center justify-center md:px-4 py-2">
+                <button
+                  onClick={() => handleDelete(vehicle._id)}
+                  className="text-white px-2 py-1 rounded"
+                >
+                  <Trash2 color="red"/>
+                </button>
                 <button
                   onClick={() => openModal(vehicle)}
                   className="text-white py-1 rounded"
                 >
                   <SquarePen color="green"/>
-                </button>
-                <button
-                  onClick={() => handleDelete(vehicle._id)}
-                  className="text-white px-2 py-1 rounded"
-                >
-                  { Loading ? <button disabled={Loading}><Trash2 color="red"/></button>  : <Trash2 color="red"/> }
                 </button>
               </td>
             </tr>
